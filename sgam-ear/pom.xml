@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.setaprox</groupId>
+		<artifactId>sgam</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<artifactId>sgam-ear</artifactId>
+
+	<packaging>ear</packaging>
+
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+
+		<finalName>sgam_1.0</finalName>
+
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>${version.ear.plugin}</version>
+				<configuration>
+					<!-- Tell Maven we are using Java EE 6 -->
+					<version>6</version>
+					<!-- Use Java EE ear libraries as needed. Java EE ear libraries are 
+						in easy way to package any libraries needed in the ear, and automatically 
+						have any modules (EJB-JARs and WARs) use them -->
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<webModule>
+							<groupId>br.com.setaprox</groupId>
+							<artifactId>sgam-view-web</artifactId>
+							<contextRoot>/sgam</contextRoot>
+						</webModule>
+					</modules>
+					<fileNameMapping>no-version</fileNameMapping>
+				</configuration>
+			</plugin>
+		</plugins>
+
+
+	</build>
+
+
+
+	<dependencies>
+		<!-- JEE 6 -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>br.com.setaprox</groupId>
+			<artifactId>sgam-business</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.setaprox</groupId>
+			<artifactId>sgam-view-web</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+
+
+</project>
